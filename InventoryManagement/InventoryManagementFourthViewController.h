@@ -12,7 +12,6 @@
 #import "InventoryManagementThirdViewController.h"
 
 
-
 @interface InventoryManagementFourthViewController : UIViewController <CLLocationManagerDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
