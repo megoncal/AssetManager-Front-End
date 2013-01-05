@@ -403,7 +403,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Marcos Vilela";
 			};
-			buildConfigurationList = 3CD1DD3A167134F7005BA169 /* Build configuration list for PBXProject "InventoryManager" */;
+			buildConfigurationList = 3CD1DD3A167134F7005BA169 /* Build configuration list for PBXProject "InventoryManagement" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -640,7 +640,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3CD1DD3A167134F7005BA169 /* Build configuration list for PBXProject "InventoryManager" */ = {
+		3CD1DD3A167134F7005BA169 /* Build configuration list for PBXProject "InventoryManagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3CD1DD6D167134F7005BA169 /* Debug */,

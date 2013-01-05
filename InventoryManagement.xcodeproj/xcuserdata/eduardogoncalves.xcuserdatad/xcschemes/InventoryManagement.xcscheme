@@ -17,7 +17,7 @@
                BlueprintIdentifier = "3CD1DD3F167134F7005BA169"
                BuildableName = "AssetManager.app"
                BlueprintName = "AssetManager"
-               ReferencedContainer = "container:InventoryManager.xcodeproj">
+               ReferencedContainer = "container:InventoryManagement.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "3CD1DD3F167134F7005BA169"
             BuildableName = "AssetManager.app"
             BlueprintName = "AssetManager"
-            ReferencedContainer = "container:InventoryManager.xcodeproj">
+            ReferencedContainer = "container:InventoryManagement.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -54,7 +54,7 @@
             BlueprintIdentifier = "3CD1DD3F167134F7005BA169"
             BuildableName = "AssetManager.app"
             BlueprintName = "AssetManager"
-            ReferencedContainer = "container:InventoryManager.xcodeproj">
+            ReferencedContainer = "container:InventoryManagement.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -72,7 +72,7 @@
             BlueprintIdentifier = "3CD1DD3F167134F7005BA169"
             BuildableName = "AssetManager.app"
             BlueprintName = "AssetManager"
-            ReferencedContainer = "container:InventoryManager.xcodeproj">
+            ReferencedContainer = "container:InventoryManagement.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
