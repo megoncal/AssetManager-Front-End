@@ -23,26 +23,20 @@
     return _locationManager;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     if([self.previusViewController editMode]){
+        
+  
         if([CLLocationManager locationServicesEnabled]){
             [self startStandardUpdates];
         }
         else{
             [self.navigationController popViewControllerAnimated:YES];
         }
+    
     }else{
         InventoryManagementThirdViewController *previusController = self.previusViewController;
         
@@ -51,11 +45,13 @@
         coordinate.longitude = previusController.inventoryData.longitude;
         
         [self exhibitMap:coordinate];
-        
     }
     
 	// Do any additional setup after loading the view.
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -67,15 +63,31 @@
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.timeOutDate = [NSDate dateWithTimeInterval:10 sinceDate:[NSDate date]];
+    [self createAndShowProgressHUD];
     [self.locationManager startUpdatingLocation];
+}
+
+- (void) createAndShowProgressHUD{
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:self.HUD];
+	self.HUD.delegate = self;
+    self.HUD.labelText = @"Locating";
+    self.HUD.detailsLabelText = @"Most Accurate Position";
+    self.HUD.square = YES;
+    [self.HUD show:YES];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [self.HUD hide:YES];
     UIAlertView *erroAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [erroAlert show];
 }
 
+/*
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     InventoryManagementThirdViewController *previusViewController = self.previusViewController;
@@ -89,8 +101,50 @@
         [self exhibitMap:location.coordinate];
         [self.locationManager stopUpdatingLocation];
     }
-    
 }
+*/
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    
+    CLLocation *location = [locations lastObject];
+    NSDate *eventDate = location.timestamp;
+    NSTimeInterval locationAge = -[eventDate timeIntervalSinceNow];
+    
+    if (locationAge > 5.0) return;
+    
+    // test that the horizontal accuracy does not indicate an invalid measurement
+    if (location.horizontalAccuracy < 0) return;
+    
+    // test the measurement to see if it is more accurate than the previous measurement
+    if (self.bestEffortAtLocation == nil || self.bestEffortAtLocation.horizontalAccuracy > location.horizontalAccuracy) {
+        // store the location as the "best effort"
+        self.bestEffortAtLocation = location;
+        
+        // test the measurement to see if it meets the desired accuracy
+        //
+        // IMPORTANT!!! kCLLocationAccuracyBest should not be used for comparison with location coordinate or altitidue
+        // accuracy because it is a negative value. Instead, compare against some predetermined "real" measure of
+        // acceptable accuracy, or depend on the timeout to stop updating. This sample depends on the timeout.
+        //
+        
+        NSDate *currentDate = [NSDate date];
+        if (location.horizontalAccuracy <= self.locationManager.desiredAccuracy ||
+            (currentDate >= self.timeOutDate)) {
+            // we have a measurement that meets our requirements, so we can stop updating the location
+            //
+            // IMPORTANT!!! Minimize power usage by stopping the location manager as soon as possible.
+            //
+            [self.locationManager stopUpdatingLocation];
+            [self.HUD hide:YES];
+            [self exhibitMap:location.coordinate];
+            // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+        }
+    }
+}
+
+
 
 
 - (MKCoordinateSpan) initialSpanUsingCoordinates:(CLLocationCoordinate2D)coordinate
@@ -119,6 +173,9 @@
 
 - (IBAction) refreshCoordinates:(id)sender{
     [self.map setNeedsDisplay];
+    self.locationManager = nil;
+    self.bestEffortAtLocation = nil;
+    self.map = nil;
     [self viewDidLoad];
 }
 

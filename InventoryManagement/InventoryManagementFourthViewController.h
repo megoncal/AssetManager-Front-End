@@ -10,14 +10,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "InventoryManagementThirdViewController.h"
+#import "MBProgressHUD.h"
 
 
-@interface InventoryManagementFourthViewController : UIViewController <CLLocationManagerDelegate,UIAlertViewDelegate>
+@interface InventoryManagementFourthViewController : UIViewController <CLLocationManagerDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *map;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (weak, nonatomic) id previusViewController;
+@property (strong, atomic) CLLocation *bestEffortAtLocation;
+@property (strong,nonatomic) MBProgressHUD *HUD;
+@property (strong, nonatomic) NSDate *timeOutDate;
 
 - (IBAction)refreshCoordinates:(id)sender;
 - (void)startStandardUpdates;
