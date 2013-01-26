@@ -111,7 +111,7 @@
     NSDate *eventDate = location.timestamp;
     NSTimeInterval locationAge = -[eventDate timeIntervalSinceNow];
     
-    if (locationAge > 5.0) return;
+    if (locationAge > 10.0) return;
     
     // test that the horizontal accuracy does not indicate an invalid measurement
     if (location.horizontalAccuracy < 0) return;
@@ -138,6 +138,8 @@
             [self.locationManager stopUpdatingLocation];
             [self.HUD hide:YES];
             [self exhibitMap:location.coordinate];
+            InventoryManagementThirdViewController *previusViewController = self.previusViewController;
+            previusViewController.coordinate = location.coordinate;
             // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
         }
