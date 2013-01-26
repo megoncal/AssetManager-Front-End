@@ -19,9 +19,8 @@
 @property (strong, nonatomic) IBOutlet MKMapView *map;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (weak, nonatomic) id previusViewController;
-@property (strong, atomic) CLLocation *bestEffortAtLocation;
 @property (strong,nonatomic) MBProgressHUD *HUD;
-@property (strong, nonatomic) NSDate *timeOutDate;
+@property (strong, atomic) NSDate *timeOutDate;
 
 - (IBAction)refreshCoordinates:(id)sender;
 - (void)startStandardUpdates;

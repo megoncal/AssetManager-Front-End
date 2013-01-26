@@ -405,6 +405,8 @@
     }
 }
 
+
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if([sender isEqual:self.imageButton])
@@ -575,7 +577,11 @@
     return @"";
 }
 
-
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([[cell reuseIdentifier] isEqual:@"header"]){
+        cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+}
 
 
 @end

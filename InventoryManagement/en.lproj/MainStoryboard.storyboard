@@ -15,7 +15,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="4ph-zk-nOE">
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Asset Search" id="Gcx-ry-c0I">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="640" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -156,6 +156,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="4HJ-LJ-bJz" firstAttribute="leading" secondItem="hSF-SL-yir" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="942-rA-OAZ"/>
                                             <constraint firstItem="hSF-SL-yir" firstAttribute="top" secondItem="1Ah-6G-N5H" secondAttribute="top" constant="4" id="Pf3-q1-jOt"/>
@@ -574,10 +575,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" mapType="hybrid" translatesAutoresizingMaskIntoConstraints="NO" id="OQo-ta-peE">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="504" id="i88-bc-iZF"/>
-                                </constraints>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OQo-ta-peE">
                                 <connections>
                                     <outlet property="delegate" destination="203-G3-89O" id="jVe-dY-bxk"/>
                                 </connections>
@@ -585,8 +583,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OQo-ta-peE" firstAttribute="top" secondItem="Neo-L8-3HW" secondAttribute="top" constant="-1" id="U4M-zk-YTA"/>
+                            <constraint firstItem="OQo-ta-peE" firstAttribute="bottom" secondItem="Neo-L8-3HW" secondAttribute="bottom" type="default" id="5yg-uj-kfz"/>
                             <constraint firstItem="OQo-ta-peE" firstAttribute="trailing" secondItem="Neo-L8-3HW" secondAttribute="trailing" type="default" id="ikn-69-tH9"/>
+                            <constraint firstItem="OQo-ta-peE" firstAttribute="top" secondItem="Neo-L8-3HW" secondAttribute="top" type="default" id="laQ-ZQ-jbG"/>
                             <constraint firstItem="OQo-ta-peE" firstAttribute="leading" secondItem="Neo-L8-3HW" secondAttribute="leading" type="default" id="rKl-gn-xdn"/>
                         </constraints>
                     </view>
